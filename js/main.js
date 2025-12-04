@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     const timeWidget = document.getElementById('current-time-date');
 
-    // --- LOGIKA STARTU STRONY (Najważniejsze!) ---
+    // --- LOGIKA STARTU STRONY (Teraz jest to natychmiastowe uruchomienie) ---
     
     startButton.addEventListener('click', () => {
         // 1. Ukryj ekran startowy
@@ -23,22 +23,23 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // 2. Pokaż główną zawartość
         mainContent.style.display = 'block';
 
-        // 3. Uruchom wideo i audio (działa dzięki kliknięciu!)
-        
-        // Uruchom audio (jest domyślnie wyciszone, włączamy)
+        // 3. Uruchom audio (przestaje być wyciszone)
         audio.muted = false; 
         audio.play().catch(e => console.error("Problem z odtwarzaniem audio:", e));
         
-        // Uruchom wideo (jest domyślnie wyciszone, aby słychać było tylko muzykę)
+        // 4. Uruchom wideo (zostaje wyciszone)
         video.muted = true; 
         video.play().catch(e => console.error("Problem z odtwarzaniem wideo:", e));
 
-        // 4. Ustaw statusy początkowe
-        audioControl.classList.add('active'); // Muzyka włączona
-        videoControl.classList.remove('active'); // Wideo wyciszone
+        // 5. Ustaw statusy początkowe, by wyglądało jak na zrzucie ekranu
+        audioControl.classList.add('active'); // Muzyka WŁĄCZONA
+        audioStatus.textContent = 'Audio: Włączone';
+        
+        videoControl.classList.remove('active'); // Wideo WYCISZONE
+        videoStatus.textContent = 'Wideo: Wyciszony';
     });
 
-    // --- FUNKCJE STERUJĄCE (Po uruchomieniu) ---
+    // --- FUNKCJE STERUJĄCE (Działają tak, jak na zrzucie ekranu) ---
 
     // Włączenie/wyłączenie Audio (muzyka)
     audioControl.addEventListener('click', () => {

@@ -1,50 +1,11 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-    const audio = document.getElementById('background-audio');
-    const video = document.getElementById('background-video');
-    
-    const audioControl = document.getElementById('audio-control');
-    const videoControl = document.getElementById('video-control');
-    
-    const audioStatus = document.getElementById('audio-status');
-    const videoStatus = document.getElementById('video-status');
-    
+    // UWAGA: Funkcjonalność sterowania audio/wideo została usunięta, 
+    // ponieważ element tła został zmieniony na iFrame YouTube, 
+    // który wymaga zaawansowanego YouTube Player API.
+    // Wideo startuje wyciszone (mute=1) i w zapętleniu (loop=1).
+
     const timeWidget = document.getElementById('current-time-date');
-
-    // --- Funkcje Sterujące Audio/Wideo ---
-
-    // Włączenie/wyłączenie Audio 
-    audioControl.addEventListener('click', () => {
-        if (audio.paused) {
-            // Próba odtworzenia po interakcji użytkownika
-            audio.play().catch(e => console.error("Problem z odtwarzaniem audio:", e));
-            audioStatus.textContent = 'Audio: Włączone';
-            audioControl.classList.add('active');
-        } else {
-            audio.pause();
-            audioStatus.textContent = 'Audio: Wyłączone';
-            audioControl.classList.remove('active');
-        }
-        // Zapewnienie, że wideo jest wyciszone, gdy włączamy muzykę
-        if (!video.muted) {
-            video.muted = true;
-            videoStatus.textContent = 'Wideo: Wyciszony';
-            videoControl.classList.remove('active');
-        }
-    });
-
-    // Włączenie/wyłączenie Wyciszenia Wideo (Odsłuch)
-    videoControl.addEventListener('click', () => {
-        if (video.muted) {
-            video.muted = false;
-            videoStatus.textContent = 'Wideo: Odsłuch'; 
-            videoControl.classList.add('active');
-        } else {
-            video.muted = true;
-            videoStatus.textContent = 'Wideo: Wyciszony';
-            videoControl.classList.remove('active');
-        }
-    });
-
+    
     // --- Widget Czasu ---
 
     function updateTimeWidget() {

@@ -1,11 +1,12 @@
 :root {
+    /* Utrzymujemy kolory Twojego motywu */
     --primary-red: #ff3333;
     --dark-bg: #111111;
     --text-color: #ffffff;
     --border-color: #333333;
 }
 
-/* --- Tło Wideo (Plik MP4 z folderu video/) --- */
+/* --- Tło Wideo --- */
 #background-video {
     position: fixed;
     top: 50%;
@@ -17,10 +18,11 @@
     z-index: -100;
     transform: translateX(-50%) translateY(-50%);
     background-size: cover;
+    /* Delikatne przyciemnienie wideo, aby tekst był bardziej czytelny */
     filter: brightness(0.7); 
 }
 
-/* --- Ekran Startowy (NOWY KOD) --- */
+/* --- Ekran Startowy --- */
 #start-screen {
     position: fixed;
     top: 0;
@@ -67,14 +69,15 @@
     pointer-events: none;
 }
 
-/* --- Globalne style i kontener --- */
+/* --- Globalne style i kontener (CENTRUM) --- */
 body {
     background-color: var(--dark-bg);
     color: var(--text-color);
     font-family: Arial, sans-serif;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    /* Ustawienie na środek ekranu w pionie dla lepszego wyśrodkowania */
+    align-items: center; 
     min-height: 100vh;
     margin: 0;
     padding: 20px 0;
@@ -82,9 +85,9 @@ body {
     overflow-x: hidden;
 }
 
-/* Ukrycie głównej treści na starcie (NOWY KOD) */
+/* Główny kontener (widoczny po kliknięciu) */
 .container {
-    max-width: 500px;
+    max-width: 400px; /* Zmniejszenie maksymalnej szerokości */
     width: 90%;
     text-align: center;
     padding: 30px;
@@ -92,18 +95,17 @@ body {
     background-color: rgba(17, 17, 17, 0.9); 
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
-    /* Domyślnie ukryty - pokaże go JavaScript */
     display: none; 
 }
 
-
-/* --- Sterowanie Audio/Wideo (Dolny Lewy Róg) --- */
+/* --- Sterowanie Audio/Wideo (LEWY DÓŁ - WIDOK JAK NA ZDJĘCIU) --- */
 .controls {
     position: fixed;
     bottom: 10px;
     left: 10px;
+    /* Używamy flex-column, żeby kontrolki były pod sobą w jednym pionowym bloku */
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
     gap: 5px;
     z-index: 50;
     font-weight: bold;
@@ -111,6 +113,7 @@ body {
 }
 
 .control-row {
+    /* Wyrównanie w rzędzie dla elementów obok siebie (Audio/Wideo) */
     display: flex;
     gap: 5px;
 }
@@ -118,28 +121,35 @@ body {
 .control-box {
     background-color: rgba(50, 50, 50, 0.8);
     border: 1px solid var(--primary-red);
-    padding: 5px 10px;
+    padding: 5px 8px; /* Zmniejszony padding */
     border-radius: 3px;
     color: var(--text-color);
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.7em; /* Zmniejszona czcionka */
     display: flex;
     align-items: center;
     transition: background-color 0.3s;
     white-space: nowrap;
 }
 
+.control-box i {
+    margin-right: 5px;
+    color: var(--primary-red);
+    font-size: 1.2em;
+}
+
 .control-box.active {
     background-color: rgba(255, 51, 51, 0.3);
 }
 
-.control-box i {
-    margin-right: 5px;
-    color: var(--primary-red);
+.secondary-controls {
+    /* Małe boksy DX/Status pod kontrolkami */
+    display: flex;
+    gap: 5px;
 }
 
 .secondary-controls .small-box {
-    width: auto;
+    width: 50%; /* Dzielimy szerokość na dwa, żeby były równe */
     padding: 5px;
     font-size: 0.7em;
     border: 1px solid var(--primary-red);
@@ -203,7 +213,7 @@ body {
 }
 
 .links {
-    margin-top: 30px;
+    margin-top: 20px; 
 }
 
 .link-button {
@@ -213,10 +223,10 @@ body {
     background-color: transparent;
     border: 2px solid var(--border-color);
     color: var(--text-color);
-    padding: 12px 15px;
-    margin-bottom: 15px;
+    padding: 10px 15px; /* Mniejsze, schludniejsze linki */
+    margin-bottom: 10px; /* Zmniejszony margines między przyciskami */
     border-radius: 8px;
-    font-size: 1.1em;
+    font-size: 1em; 
     text-align: left;
     transition: all 0.3s;
     width: 100%;
@@ -238,7 +248,7 @@ body {
 
 .link-label {
     display: block;
-    font-size: 0.8em;
+    font-size: 0.7em; /* Lekko zmniejszona czcionka opisu */
     color: #999999;
     font-weight: normal;
     position: absolute;
@@ -251,8 +261,10 @@ body {
     line-height: 1.2;
 }
 
+/* --- Stopka (Created by Xnat) --- */
 .footer {
-    margin-top: 40px;
+    margin-top: 25px; /* Dodatkowa przestrzeń nad stopką */
+    margin-bottom: 0;
     font-size: 0.8em;
     color: #666666;
 }

@@ -5,29 +5,54 @@
     --border-color: #333333;
 }
 
-/* --- NOWY KOD DLA WIDEO YOUTUBE W TLE (ZAMIAST PLIKU MP4) --- */
-#video-background-container {
+/* --- Tło Wideo (Plik MP4 z folderu video/) --- */
+#background-video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+    filter: brightness(0.7); 
+}
+
+/* --- Ekran Startowy (NOWY KOD) --- */
+#start-screen {
     position: fixed;
     top: 0;
     left: 0;
     width: 100vw;
     height: 100vh;
-    z-index: -100; 
-    overflow: hidden;
+    background-color: var(--dark-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100; 
 }
 
-#youtube-background-iframe {
-    /* Sprawia, że wideo zajmuje całą szerokość i wysokość, bez czarnych pasów */
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200vw; 
-    height: 200vh; 
-    min-width: 100%;
-    min-height: 100%;
-    transform: translate(-50%, -50%);
-    pointer-events: none; /* Umożliwia klikanie przez iFrame */
-    filter: brightness(0.6); /* Przyciemnienie tła wideo */
+#start-button {
+    background-color: var(--primary-red);
+    color: var(--text-color);
+    border: none;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+#start-button:hover {
+    background-color: #e60000;
+    transform: scale(1.05);
+}
+
+#start-button i {
+    margin-right: 10px;
 }
 
 /* Nakładka Czerwonej Siatki/Kropek */
@@ -37,7 +62,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* Efekt czerwonych kropek/siatki */
     background: radial-gradient(circle, rgba(255, 51, 51, 0.05) 1px, transparent 1px) 0 0 / 20px 20px;
     z-index: -99;
     pointer-events: none;
@@ -58,6 +82,7 @@ body {
     overflow-x: hidden;
 }
 
+/* Ukrycie głównej treści na starcie (NOWY KOD) */
 .container {
     max-width: 500px;
     width: 90%;
@@ -67,7 +92,10 @@ body {
     background-color: rgba(17, 17, 17, 0.9); 
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+    /* Domyślnie ukryty - pokaże go JavaScript */
+    display: none; 
 }
+
 
 /* --- Sterowanie Audio/Wideo (Dolny Lewy Róg) --- */
 .controls {

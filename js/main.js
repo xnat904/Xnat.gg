@@ -1,23 +1,74 @@
-(function ($) {
-    "use strict";
-   
-    // Testimonials carousel
-    $(".testimonials-carousel").owlCarousel({
-        autoplay: true,
-        dots: true,
-        loop: true,
-        responsive: {
-            0:{
-                items:1
-            },
-            576:{
-                items:1
-            },
-            768:{
-                items:2
-            }
+document.addEventListener('DOMContentLoaded', (event) => {
+    const audio = document.getElementById('background-audio');
+    const video = document.getElementById('background-video');
+    
+    const audioControl = document.getElementById('audio-control');
+    const videoControl = document.getElementById('video-control');
+    
+    const audioStatus = document.getElementById('audio-status');
+    const videoStatus = document.getElementById('video-status');
+    
+    const timeWidget = document.getElementById('current-time-date');
+
+    // --- Funkcje Sterujące Audio/Wideo ---
+
+    // Włączenie/wyłączenie Audio 
+    audioControl.addEventListener('click', () => {
+        if (audio.paused) {
+            // Próba odtworzenia po interakcji użytkownika
+            audio.play().catch(e => console.error("Problem z odtwarzaniem audio:", e));
+            audioStatus.textContent = 'Audio: Włączone';
+            audioControl.classList.add('active');
+        } else {
+            audio.pause();
+            audioStatus.textContent = 'Audio: Wyłączone';
+            audioControl.classList.remove('active');
+        }
+        // Zapewnienie, że wideo jest wyciszone, gdy włączamy muzykę
+        if (!video.muted) {
+            video.muted = true;
+            videoStatus.textContent = 'Wideo: Wyciszony';
+            videoControl.classList.remove('active');
         }
     });
-    
-})(jQuery);
 
+    // Włączenie/wyłączenie Wyciszenia Wideo (Odsłuch)
+    videoControl.addEventListener('click', () => {
+        if (video.muted) {
+            video.muted = false;
+            videoStatus.textContent = 'Wideo: Odsłuch'; 
+            videoControl.classList.add('active');
+        } else {
+            video.muted = true;
+            videoStatus.textContent = 'Wideo: Wyciszony';
+            videoControl.classList.remove('active');
+        }
+    });
+
+    // --- Widget Czasu ---
+
+    function updateTimeWidget() {
+        const now = new Date();
+        const options = { 
+            weekday: 'long', 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric', 
+            hour: '2-digit', 
+            minute: '2-digit', 
+            second: '2-digit',
+            hour12: false 
+        };
+        const formattedDate = now.toLocaleString('pl-PL', options);
+        // Formatowanie daty zgodnie z stylem z zrzutu
+        const finalFormat = formattedDate
+            .toLowerCase()
+            .replace(/,/, '')
+            .replace(/(\s\d{4})/, ' $1');
+
+        timeWidget.textContent = finalFormat;
+    }
+
+    setInterval(updateTimeWidget, 1000);
+    updateTimeWidget(); 
+});

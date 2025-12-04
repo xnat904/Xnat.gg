@@ -9,16 +9,16 @@
 </head>
 <body>
     
-    <audio id="background-audio" loop>
-        <source src="music.mp3" type="audio/mp3">
-        Twoja przeglądarka nie obsługuje elementu audio.
-    </audio>
-
-    <video playsinline autoplay muted loop id="background-video">
-        <source src="background_video.mp4" type="video/mp4">
-    </video>
-
-    <div class="video-overlay"></div>
+    <div id="video-background-container">
+        <iframe id="youtube-background-iframe"
+            src="https://www.youtube.com/embed/lODY-Ud02UQ?controls=0&autoplay=1&mute=1&loop=1&playlist=lODY-Ud02UQ&showinfo=0&rel=0&iv_load_policy=3&disablekb=1"
+            frameborder="0"
+            allow="autoplay; encrypted-media"
+            allowfullscreen>
+        </iframe>
+    </div>
+    
+    <div class="video-overlay"></div> 
 
     <div class="container">
         <div class="controls">
@@ -43,7 +43,7 @@
         </div>
         
         <div class="profile">
-            <img src="img/avatar.jpg.png" alt="Zdjęcie profilowe Xnat" class="avatar">
+            <img src="img/avatar.jpg.png" alt="Zdjęcie profilowe Xnat" class="avatar"> 
             <h1 class="username">Xnat</h1>
             <p class="email">xnat3377@gmail.com</p>
         </div>
@@ -96,5 +96,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-

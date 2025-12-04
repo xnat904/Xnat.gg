@@ -14,34 +14,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
     
     const timeWidget = document.getElementById('current-time-date');
 
-    // --- LOGIKA STARTU STRONY (Teraz jest to natychmiastowe uruchomienie) ---
-    
+    // --- LOGIKA STARTU STRONY (Natychmiastowe uruchomienie mediów) ---
     startButton.addEventListener('click', () => {
-        // 1. Ukryj ekran startowy
         startScreen.style.display = 'none';
-        
-        // 2. Pokaż główną zawartość
         mainContent.style.display = 'block';
 
-        // 3. Uruchom audio (przestaje być wyciszone)
+        // Uruchom audio (przestaje być wyciszone)
         audio.muted = false; 
         audio.play().catch(e => console.error("Problem z odtwarzaniem audio:", e));
         
-        // 4. Uruchom wideo (zostaje wyciszone)
+        // Uruchom wideo (zostaje wyciszone, żeby nie kolidować z muzyką)
         video.muted = true; 
         video.play().catch(e => console.error("Problem z odtwarzaniem wideo:", e));
 
-        // 5. Ustaw statusy początkowe, by wyglądało jak na zrzucie ekranu
-        audioControl.classList.add('active'); // Muzyka WŁĄCZONA
+        // Ustaw statusy początkowe zgodnie ze zrzutem ekranu
+        audioControl.classList.add('active'); 
         audioStatus.textContent = 'Audio: Włączone';
         
-        videoControl.classList.remove('active'); // Wideo WYCISZONE
+        videoControl.classList.remove('active'); 
         videoStatus.textContent = 'Wideo: Wyciszony';
     });
 
-    // --- FUNKCJE STERUJĄCE (Działają tak, jak na zrzucie ekranu) ---
-
-    // Włączenie/wyłączenie Audio (muzyka)
+    // --- FUNKCJE STERUJĄCE (Po uruchomieniu) ---
     audioControl.addEventListener('click', () => {
         if (audio.paused || audio.muted) {
             audio.muted = false;
@@ -55,7 +49,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         }
     });
 
-    // Włączenie/wyłączenie Dźwięku Wideo (dźwięk z klipu tła)
     videoControl.addEventListener('click', () => {
         if (video.muted) {
             video.muted = false;
